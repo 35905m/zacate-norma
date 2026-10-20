@@ -11,7 +11,8 @@ var TR={lawn:'Lawn',plumbing:'Plumbing',hvac:'HVAC',electrical:'Electrical',tree
 function done(){f.hidden=true;document.getElementById('ty').hidden=false;document.getElementById('box').scrollIntoView({behavior:'smooth'});}
 var sent=false;
 f.addEventListener('submit',function(e){e.preventDefault();if(sent)return;
- var full=f.name.value.trim().replace(/\s+/g,' '),ok=full&&f.phone.value.replace(/\D/g,'').length>=10&&f.trade.value;
+ var full=f.name.value.trim().replace(/\s+/g,' '),ok=full&&f.phone.value.replace(/\D/g,'').length>=10&&f.trade.value,em=f.email.value.trim();
+ if(ok&&em&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))ok=false;
  document.getElementById('err').hidden=!!ok;if(!ok)return;sent=true;
  var parts=full.split(' '),d=f.dataset,lang=d.lang,cons=f.querySelector('.consent');
  var b=new URLSearchParams({first_name:parts[0],last_name:parts.slice(1).join(' '),full_name:full,phone:f.phone.value.trim(),email:f.email.value.trim(),
